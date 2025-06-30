@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Poetry: qalc CLI",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "qalc",
+            "justMyCode": true,
+            "console": "integratedTerminal",
+            "args": [
+                "backtest",
+                "--strategy", "rsi_trailing_stop",
+                "--symbol", "AAPL",
+                "--days", "5"
+            ],
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
