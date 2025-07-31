@@ -2,19 +2,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Poetry: qalc CLI",
+            "name": "MCP Server",
             "type": "debugpy",
             "request": "launch",
-            "module": "qalc",
-            "justMyCode": true,
-            "console": "integratedTerminal",
+            "module": "qalc.mcp",
             "args": [
-                "backtest",
-                "--strategy", "rsi_trailing_stop",
-                "--symbol", "AAPL",
-                "--days", "5"
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000",
             ],
-            "envFile": "${workspaceFolder}/.env"
+            "console": "integratedTerminal"
         }
     ]
 }

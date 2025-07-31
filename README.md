@@ -19,10 +19,10 @@ qalc is a modular, strategy-driven trading CLI and backtesting framework for Pyt
    cd qalc
    ```
 
-2. Install dependencies with Poetry:
+2. Install dependencies with Poetry (create .venv in project directory):
 
    ```sh
-   poetry install
+   POETRY_VIRTUALENVS_IN_PROJECT=true poetry install --with=dev
    ```
 
 3. Copy and edit your `.env` file for API keys:

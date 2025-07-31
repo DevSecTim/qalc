@@ -1,2 +1,10 @@
 .env
 .venv
+__pycache__
+.ruff_cache
+.pytest_cache
+.coverage
+.ipynb_checkpoints
+.DS_Store
+build
+*.egg-info
