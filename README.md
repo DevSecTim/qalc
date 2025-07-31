@@ -1,71 +1,63 @@
-# qalc
 
-qalc is a modular, strategy-driven trading CLI and backtesting framework for Python, managed by Poetry. It supports pluggable data providers (Alpaca by default), strategy selection via CLI, and is designed for rapid strategy development and testing.
+# Qalc
 
-## Features
+qalc is a modular, extensible Model Context Protocol (MCP) server and trading/backtesting framework for Python. It enables rapid development, testing, and serving of trading strategies and LLM-powered tools via a robust CLI and MCP-compatible API.
 
-- Strategy registration and selection via CLI
-- Pluggable data provider abstraction (Alpaca default)
-- Backtesting workflows
-- VS Code debug and task integration
-- Environment variable management via `.env`
+## Architecture & Features
 
-## Installation
+- **Strategy registration:** Strategies are implemented in `qalc/strategies/` and registered via lookup tables for CLI selection.
+- **Data providers:** Pluggable via factory/lookup pattern in `qalc/market_data/providers/` (Alpaca is default).
+- **Trading platforms:** Modularized in `qalc/trading/platforms/`.
+- **CLI & app logic:** Entrypoints in `qalc/app.py` and `qalc/__main__.py`.
+- **LLM/agent integration:** FastMCP tools/agents in `qalc/llm/` and `qalc/mcp/`.
+- **Environment variables:** Managed via `.env` (see `.env.example`).
+- **CI/CD:** Docker images built and pushed on tag via GitHub Actions (`.github/workflows/docker-publish.yml`).
 
-1. Clone the repository:
-
-   ```sh
-   git clone <repo-url>
-   cd qalc
-   ```
-
-2. Install dependencies with Poetry (create .venv in project directory):
-
-   ```sh
-   POETRY_VIRTUALENVS_IN_PROJECT=true poetry install --with=dev
-   ```
-
-3. Copy and edit your `.env` file for API keys:
-
-   ```sh
-   cp .env.example .env
-   # Edit .env with your Alpaca API keys
-   ```
-
-## Usage
-
-### Run the CLI
+## Quickstart
 
 ```sh
-poetry run qalc backtest --strategy rsi_trailing_stop --symbol AAPL --days 5
+# Install dependencies (with dev tools)
+uv venv
+uv pip install .
+
+# Copy and edit .env for API keys
+cp .env.example .env
+# Edit .env with your Alpaca API keys
+
+# Start the MCP server
+python -m qalc.mcp.main
+
+# Run a backtest
+python -m qalc backtest --strategy rsi_trailing_stop --symbol AAPL --days 5
 ```
 
-### Run as a module
+## Developer Workflows
 
-```sh
-poetry run python -m qalc backtest --strategy rsi_trailing_stop --symbol AAPL --days 5
-```
+- **Start MCP server:** `python -m qalc.mcp.main`
+- **Lint:** `uv pip install --system --no-cache-dir .[dev] && flake8 qalc`
+- **Test:** `pytest`
+- **Format:** `black qalc`
+- **Docker build:** See `Dockerfile` and `.github/workflows/docker-publish.yml`
+- **VS Code:** Use included debug configs and tasks for install, lint, test, and format.
 
-### VS Code
+## Extending qalc
 
-- Use the included debug configuration to run and debug the CLI.
-- Use tasks for install, update, lint, and test workflows.
+- **Add a strategy:**
+  1. Implement in `qalc/strategies/`.
+  2. Register in the strategy lookup table.
+  3. Expose via CLI argument.
+- **Add a data provider:**
+  1. Implement in `qalc/market_data/providers/`.
+  2. Register in the provider factory.
 
-## Example: Backtest RSI Trailing Stop
+## Key Files & Directories
 
-```sh
-poetry run qalc backtest --strategy rsi_trailing_stop --symbol TSLA --trail_percent 0.05 --days 10
-```
-
-## Adding Strategies
-
-- Register new strategies in `main.py` in the `STRATEGIES` dictionary.
-- Implement your strategy in the `qalc/strategies/` directory.
-
-## Linting & Testing
-
-- Lint: `poetry run flake8 qalc`
-- Test: `poetry run pytest`
+- `qalc/strategies/` — Trading strategies
+- `qalc/market_data/providers/` — Data providers
+- `qalc/app.py`, `qalc/__main__.py` — CLI entry points
+- `qalc/llm/` — LLM/agent integration
+- `Dockerfile`, `.github/workflows/docker-publish.yml` — Build and CI/CD
+- `README.md` — Usage, install, and workflow details
 
 ---
 
