@@ -36,4 +36,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/devsectim/qalc:${{ github.ref_name }}
+          tags: |
+            ghcr.io/devsectim/qalc:${{ github.ref_name }}
+            ghcr.io/devsectim/qalc:latest
