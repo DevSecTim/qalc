@@ -2,13 +2,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Qalc MCP",
+            "name": "Qalc MCP Server",
             "type": "debugpy",
             "request": "launch",
             "module": "qalc.mcp",
             "args": [],
-            "console": "internalConsole",
-            "internalConsoleOptions": "openOnSessionStart",
             "python": "${workspaceFolder}/.venv/bin/python"
         }
     ]

@@ -3,7 +3,7 @@ from typing import Any, Dict
 from pandas import DataFrame
 from ta.momentum import RSIIndicator
 from pydantic import BaseModel, Field
-from .base_strategy import BatchStrategy
+from ._base_strategy import BatchStrategy
 
 
 class RSITrailingStopParams(BaseModel):

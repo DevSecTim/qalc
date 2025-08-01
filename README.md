@@ -17,18 +17,14 @@ qalc is a modular, extensible Model Context Protocol (MCP) server and trading/ba
 
 ```sh
 # Install dependencies (with dev tools)
-uv venv
-uv pip install .
+uv venv && uv pip install .
 
 # Copy and edit .env for API keys
 cp .env.example .env
-# Edit .env with your Alpaca API keys
 
 # Start the MCP server
 python -m qalc.mcp.main
 
-# Run a backtest
-python -m qalc backtest --strategy rsi_trailing_stop --symbol AAPL --days 5
 ```
 
 ## Developer Workflows
