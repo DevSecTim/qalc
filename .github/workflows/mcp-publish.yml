@@ -7,7 +7,9 @@ on:
       - '*'
   workflow_dispatch:
 
-jobs:
+env:
+  QALC_MCP_IMAGE: ghcr.io/devsectim/qalc-mcp
+
   build-and-push:
     runs-on: ubuntu-latest
     permissions:
@@ -35,7 +37,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: docker/Dockerfile.mcp
           push: true
           tags: |
-            ghcr.io/devsectim/qalc:${{ github.ref_name }}
-            ghcr.io/devsectim/qalc:latest
+            ${{ env.QALC_MCP_IMAGE }}:${{ github.ref_name }}
+            ${{ env.QALC_MCP_IMAGE }}:latest
