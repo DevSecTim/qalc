@@ -5,7 +5,6 @@ import qalc.mcp.tools as tools_module
 from fastmcp import FastMCP
 
 
-
 mcp = FastMCP(
     name="qalc",
     instructions="A collection of tools for financial analysis and trading strategies.",
@@ -38,7 +37,7 @@ def main():
             mcp.tool(obj)
 
     # Run the MCP server
-    mcp.run(transport="http", host=args.host, port=args.port)
+    mcp.run(transport="http", show_banner=False, host=args.host, port=args.port)
 
 
 if __name__ == "__main__":
